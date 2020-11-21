@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Sus Graph</title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+    <script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.js"></script>
+    <script src="https://unpkg.com/tippy.js@5.2.1/dist/tippy-bundle.iife.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@5.2.1/dist/tippy.css" />
+
+    <script src="main.js"></script>
+
+    <style>
+        body {
+            font-family: helvetica neue, helvetica, liberation sans, arial, sans-serif;
+            font-size: 14px;
+        }
+
+        #cy {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        #susList {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            padding-top: 10px;
+            padding-left: 10px;
+            font-size: large;
+            pointer-events: none;
+        }
+
+        h1 {
+            opacity: 0.5;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        #buttons {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: 99999;
+        }
+
+        .tippy-popper {
+            transition: none !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var cy = window.initialize(document.getElementById('cy'))
+            var eh = cy.edgehandles({
+                hoverDelay: 50,
+                snap: true,
+                handlePosition: function (node) {
+                    return 'right top'
+                },
+                complete: function(source, target, ele){
+                    window.onEdgeAdd(cy, source, target, ele)
+                }
+            })
+
+            window.addEventListener('keypress', function(e) {
+                window.keyhandler(cy, e.key)
+            })
+        })
+    </script>
+
+</head>
+
+<body>
+
+    <div id="susList"></div>
+
+    <div id="cy"></div>
+
+</body>
+
+</html>
